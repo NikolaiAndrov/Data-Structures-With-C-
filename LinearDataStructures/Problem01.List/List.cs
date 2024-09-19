@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class List<T> : IAbstractList<T>
     {
@@ -40,7 +41,15 @@
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < this.Count; i++)
+            {
+                if (this.items[i].Equals(item))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public int IndexOf(T item)
