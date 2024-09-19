@@ -112,6 +112,7 @@
 
             this.items[this.Count - 1] = default;
             this.Count--;
+            this.DecreaseCapacity();
         }
         public IEnumerator<T> GetEnumerator()
         {
@@ -123,6 +124,21 @@
 
         IEnumerator IEnumerable.GetEnumerator()
             => this.GetEnumerator();
+
+        private void DecreaseCapacity()
+        {
+            if (this.Count <= (this.items.Length / 2))
+            {
+                var newArray = new T[this.Count + 1];
+
+                for (int i = 0; i < this.Count; i++)
+                {
+                    newArray[i] = this.items[i];
+                }
+
+                this.items = newArray;
+            }
+        }
 
         private void IncreaseCapacity()
         {
