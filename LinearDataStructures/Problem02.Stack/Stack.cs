@@ -8,16 +8,32 @@
     {
         private class Node
         {
-            
-        }
+            public Node(T element, Node next)
+            {
+                this.Element = element;
+                this.Next = next;
+            }
+
+            public Node(T element) 
+                : this(element, null) 
+            {
+                this.Element = element;
+            }
+
+            public T Element {  get; set; }
+
+            public Node Next { get; set; }
+        }        
 
         private Node top;
 
-        public int Count => throw new System.NotImplementedException();
+        public int Count {  get; private set; }
 
         public void Push(T item)
         {
-            throw new NotImplementedException();
+            var newNode = new Node(item, this.top);
+            this.top = newNode;
+            this.Count++;
         }
 
         public T Pop()
