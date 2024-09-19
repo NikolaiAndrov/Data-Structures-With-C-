@@ -3,7 +3,6 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
 
     public class List<T> : IAbstractList<T>
     {
@@ -27,8 +26,18 @@
 
         public T this[int index]
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get
+            {
+                this.ValidateIndex(index);
+                return this.items[index];
+            }
+            
+            set
+            {
+                this.ValidateIndex(index);
+                this.items[index] = value;
+            }
+
         }
 
         public int Count { get; private set; }
@@ -67,7 +76,16 @@
 
         public void Insert(int index, T item)
         {
-            throw new NotImplementedException();
+            this.ValidateIndex(index);
+            this.IncreaseCapacity();
+
+            for (int i = this.Count; i > index; i--)
+            {
+                this.items[i] = this.items[i - 1];
+            }
+
+            this.items[index] = item;
+            this.Count++;
         }
 
         public bool Remove(T item)
@@ -102,6 +120,14 @@
                 }
 
                 this.items = newArray;
+            }
+        }
+
+        private void ValidateIndex(int index)
+        {
+            if (index < 0 || index >= this.Count)
+            {
+                throw new IndexOutOfRangeException();
             }
         }
     }
