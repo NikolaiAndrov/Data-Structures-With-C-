@@ -16,7 +16,12 @@
 
         public List(int capacity)
         {
-            throw new NotImplementedException();
+            if (capacity < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(capacity));
+            }
+
+            this.items = new T[capacity];
         }
 
         public T this[int index]
@@ -29,15 +34,11 @@
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            this.IncreaseCapacity();
+            this.items[this.Count++] = item;
         }
 
         public bool Contains(T item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerator<T> GetEnumerator()
         {
             throw new NotImplementedException();
         }
@@ -61,10 +62,30 @@
         {
             throw new NotImplementedException();
         }
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (int i = 0; i < this.Count; i++)
+            {
+                yield return this.items[i];
+            }
+        }
 
         IEnumerator IEnumerable.GetEnumerator()
+            => this.GetEnumerator();
+
+        private void IncreaseCapacity()
         {
-            throw new NotImplementedException();
+            if (this.items.Length == this.Count)
+            {
+                var newArray = new T[this.Count * 2];
+
+                for (int i = 0; i < this.Count; i++)
+                {
+                    newArray[i] = this.items[i];
+                }
+
+                this.items = newArray;
+            }
         }
     }
 }
