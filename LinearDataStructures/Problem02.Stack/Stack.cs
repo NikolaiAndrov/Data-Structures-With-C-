@@ -43,7 +43,8 @@
 
         public T Peek()
         {
-            throw new System.NotImplementedException();
+            this.CheckIfStackIsEmpty();
+            return this.top.Element;
         }
 
         public bool Contains(T item)
@@ -59,6 +60,14 @@
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
+        }
+
+        private void CheckIfStackIsEmpty()
+        {
+            if (this.top == null)
+            {
+                throw new InvalidOperationException();
+            }
         }
     }
 }
