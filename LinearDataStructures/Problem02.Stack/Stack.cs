@@ -55,7 +55,21 @@
 
         public bool Contains(T item)
         {
-            throw new System.NotImplementedException();
+            bool found = false;
+
+            var node = this.top;
+            while (node != null)
+            {
+                if (node.Element.Equals(item))
+                {
+                    found = true;
+                    break;
+                }
+
+                node = node.Next;
+            }
+
+            return found;
         }
 
         public IEnumerator<T> GetEnumerator()
