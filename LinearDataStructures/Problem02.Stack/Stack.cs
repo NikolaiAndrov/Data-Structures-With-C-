@@ -60,13 +60,17 @@
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            var node = this.top;
+
+            while (node != null)
+            {
+                yield return node.Element;
+                node = node.Next;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+            => this.GetEnumerator();
 
         private void CheckIfStackIsEmpty()
         {
