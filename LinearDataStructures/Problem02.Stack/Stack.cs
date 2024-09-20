@@ -38,7 +38,13 @@
 
         public T Pop()
         {
-            throw new System.NotImplementedException();
+            this.CheckIfStackIsEmpty();
+
+            T element = this.top.Element;
+            var newTop = this.top.Next;
+            this.top = newTop;  
+            this.Count--;
+            return element;
         }
 
         public T Peek()
