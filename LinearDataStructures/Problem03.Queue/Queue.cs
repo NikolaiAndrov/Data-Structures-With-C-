@@ -56,7 +56,8 @@
 
         public T Peek()
         {
-            throw new NotImplementedException();
+            this.CheckIfQueueIsEmpty();
+            return this.head.Element;
         }
 
         public bool Contains(T item)
@@ -77,5 +78,13 @@
 
         IEnumerator IEnumerable.GetEnumerator()
             => this.GetEnumerator();
+
+        private void CheckIfQueueIsEmpty()
+        {
+            if (this.head == null)
+            {
+                throw new InvalidOperationException();
+            }
+        }
     }
 }
