@@ -51,7 +51,12 @@
 
         public T Dequeue()
         {
-            throw new NotImplementedException();
+            this.CheckIfQueueIsEmpty();
+
+            var node = this.head;
+            this.head = node.Next;
+            this.Count--;
+            return node.Element;
         }
 
         public T Peek()
