@@ -91,7 +91,30 @@
 
         public T RemoveLast()
         {
-            throw new NotImplementedException();
+            this.CheckIfEmpty();
+
+            T element;
+
+            if (this.Count == 1)
+            {
+                element = this.head.Element;
+                this.head = null;
+            }
+            else
+            {
+                var node = this.head;
+
+                for (int i = 1; i <= this.Count - 2; i++)
+                {
+                    node = node.Next;
+                }
+
+                element = node.Next.Element;
+                node.Next = null;
+            }
+
+            this.Count--;
+            return element;
         }
 
         private void CheckIfEmpty()
