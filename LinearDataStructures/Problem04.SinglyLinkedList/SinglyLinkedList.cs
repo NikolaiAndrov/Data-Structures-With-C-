@@ -31,7 +31,9 @@
 
         public void AddFirst(T item)
         {
-            throw new NotImplementedException();
+            var node = new Node(item, this.head);
+            this.head = node;
+            this.Count++;
         }
 
         public void AddLast(T item)
@@ -41,7 +43,8 @@
 
         public T GetFirst()
         {
-            throw new NotImplementedException();
+            this.CheckIfEmpty();
+            return this.head.Element;
         }
 
         public T GetLast()
@@ -57,6 +60,14 @@
         public T RemoveLast()
         {
             throw new NotImplementedException();
+        }
+
+        private void CheckIfEmpty()
+        {
+            if (this.head == null)
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         public IEnumerator<T> GetEnumerator()
