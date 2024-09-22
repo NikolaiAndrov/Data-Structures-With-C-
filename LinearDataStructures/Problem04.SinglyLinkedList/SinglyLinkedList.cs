@@ -25,7 +25,9 @@
             public Node Next { get; set; }
         }
 
-        public int Count => throw new NotImplementedException();
+        private Node head;
+
+        public int Count {  get; private set; }
 
         public void AddFirst(T item)
         {
@@ -33,11 +35,6 @@
         }
 
         public void AddLast(T item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerator<T> GetEnumerator()
         {
             throw new NotImplementedException();
         }
@@ -62,9 +59,18 @@
             throw new NotImplementedException();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            var node = this.head;
+
+            while (node != null)
+            {
+                yield return node.Element;
+                node = node.Next;
+            }
         }
+
+        IEnumerator IEnumerable.GetEnumerator()
+            => this.GetEnumerator();
     }
 }
