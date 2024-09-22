@@ -65,7 +65,16 @@
 
         public T GetLast()
         {
-            throw new NotImplementedException();
+            this.CheckIfEmpty();
+
+            var node = this.head;
+
+            while (node.Next != null)
+            {
+                node = node.Next;
+            }
+
+            return node.Element;
         }
 
         public T RemoveFirst()
