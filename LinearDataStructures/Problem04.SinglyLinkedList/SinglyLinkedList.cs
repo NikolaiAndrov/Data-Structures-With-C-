@@ -79,7 +79,14 @@
 
         public T RemoveFirst()
         {
-            throw new NotImplementedException();
+            this.CheckIfEmpty();
+
+            T element = this.head.Element;
+            var newHead = this.head.Next;
+            this.head = newHead;
+            this.Count--;
+
+            return element;
         }
 
         public T RemoveLast()
