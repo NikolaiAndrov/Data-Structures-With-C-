@@ -12,11 +12,11 @@
             {
             }
 
-            protected T Element { get; set; }
+            public T Element { get; set; }
 
-            protected Node Next { get; set; }
+            public Node Next { get; set; }
 
-            protected Node Previous { get; set; }
+            public Node Previous { get; set; }
         }
 
         private Node head;
@@ -56,12 +56,16 @@
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            Node node = this.head;
+
+            while (node != null)
+            {
+                yield return node.Element;
+                node = node.Next;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+            => this.GetEnumerator();
     }
 }
