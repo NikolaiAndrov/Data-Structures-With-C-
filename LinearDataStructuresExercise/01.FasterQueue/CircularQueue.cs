@@ -8,6 +8,8 @@
     {
         private const int DefaultCapacity = 4;
         private T[] items;
+        private int startIndex;
+        private int endIndex;
 
         public CircularQueue()
             : this(DefaultCapacity)
@@ -33,7 +35,14 @@
 
         public void Enqueue(T item)
         {
-            throw new NotImplementedException();
+            if (this.Count >= this.items.Length)
+            {
+                this.Grow();
+            }
+
+            this.items[endIndex] = item;
+            this.endIndex = (this.endIndex + 1) % this.items.Length;
+            this.Count++;
         }
 
         public T Peek()
@@ -47,12 +56,29 @@
         }
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < this.Count; i++)
+            {
+                int index = (this.startIndex + i) % this.items.Length;
+                yield return this.items[index];
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
+            => this.GetEnumerator();
+
+        private void Grow()
         {
-            throw new NotImplementedException();
+            T[] newArray = new T[this.items.Length * 2];
+
+            for (int i = 0; i < this.Count; i++)
+            {
+                int index = (this.startIndex + i) % this.items.Length;
+                newArray[i] = this.items[index];
+            }
+
+            this.items = newArray;
+            this.startIndex = 0;
+            this.endIndex = this.Count;
         }
     }
 
