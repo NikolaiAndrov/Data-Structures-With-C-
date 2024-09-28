@@ -32,6 +32,7 @@
         {
             this.CheckIfEmpty();
             T item = this.items[startIndex];
+            this.items[startIndex] = default;
             this.startIndex++;
             this.Count--;
             return item;
