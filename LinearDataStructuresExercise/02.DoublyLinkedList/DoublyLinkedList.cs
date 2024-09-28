@@ -46,7 +46,21 @@
 
         public void AddLast(T item)
         {
-            throw new NotImplementedException();
+            Node node = new Node(item);
+
+            if(this.tail == null)
+            {
+                this.tail = node;
+                this.head = node;
+            }
+            else
+            {
+                this.tail.Next = node;
+                node.Previous = this.tail;
+                this.tail = node;
+            }
+
+            this.Count++;
         }
 
         public T GetFirst()
