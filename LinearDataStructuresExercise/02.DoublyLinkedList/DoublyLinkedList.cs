@@ -77,12 +77,44 @@
 
         public T RemoveFirst()
         {
-            throw new NotImplementedException();
+            this.CheckAndThrowIfEmpty();
+            T element = this.head.Element;
+
+            if (this.Count == 1)
+            {
+                this.head = null;
+                this.tail = null;
+            }
+            else
+            {
+                Node newHead = this.head.Next;
+                this.head = newHead;
+                this.head.Previous = null;
+            }
+
+            this.Count--;
+            return element;
         }
 
         public T RemoveLast()
         {
-            throw new NotImplementedException();
+            this.CheckAndThrowIfEmpty();
+            T element = this.tail.Element;
+
+            if (this.Count == 1)
+            {
+                this.head = null;
+                this.tail = null;
+            }
+            else
+            {
+                Node newTail = this.tail.Previous;
+                this.tail = newTail;
+                this.tail.Next = null;
+            }
+
+            this.Count--;
+            return element;
         }
 
         public IEnumerator<T> GetEnumerator()
