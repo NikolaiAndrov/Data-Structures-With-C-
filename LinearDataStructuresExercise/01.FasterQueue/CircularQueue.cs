@@ -53,7 +53,15 @@
 
         public T[] ToArray()
         {
-            throw new NotImplementedException();
+            T[] arrayToReturn = new T[this.Count];
+
+            for (int i = 0; i < this.Count; i++)
+            {
+                int index = (this.startIndex + i) % this.items.Length;
+                arrayToReturn[i] = this.items[index];
+            }
+
+            return arrayToReturn;
         }
         public IEnumerator<T> GetEnumerator()
         {
