@@ -47,7 +47,8 @@
 
         public T Peek()
         {
-            throw new NotImplementedException();
+            this.CheckIfEmpty();
+            return this.items[this.startIndex];
         }
 
         public T[] ToArray()
@@ -80,6 +81,13 @@
             this.startIndex = 0;
             this.endIndex = this.Count;
         }
-    }
 
+        private void CheckIfEmpty()
+        {
+            if (this.Count == 0)
+            {
+                throw new InvalidOperationException();
+            }
+        }
+    }
 }
