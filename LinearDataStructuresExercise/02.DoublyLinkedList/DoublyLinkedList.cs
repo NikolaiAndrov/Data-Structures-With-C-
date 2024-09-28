@@ -65,7 +65,8 @@
 
         public T GetFirst()
         {
-            throw new NotImplementedException();
+            this.CheckAndThrowIfEmpty();
+            return this.head.Element;
         }
 
         public T GetLast()
@@ -96,5 +97,13 @@
 
         IEnumerator IEnumerable.GetEnumerator()
             => this.GetEnumerator();
+
+        private void CheckAndThrowIfEmpty()
+        {
+            if (this.head == null)
+            {
+                throw new InvalidOperationException();
+            }
+        }
     }
 }
