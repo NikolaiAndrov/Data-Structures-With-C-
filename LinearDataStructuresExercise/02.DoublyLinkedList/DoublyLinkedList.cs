@@ -71,7 +71,8 @@
 
         public T GetLast()
         {
-            throw new NotImplementedException();
+            this.CheckAndThrowIfEmpty();
+            return this.tail.Element;
         }
 
         public T RemoveFirst()
