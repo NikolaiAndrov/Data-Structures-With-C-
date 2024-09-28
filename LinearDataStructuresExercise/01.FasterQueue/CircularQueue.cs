@@ -30,7 +30,11 @@
 
         public T Dequeue()
         {
-            throw new NotImplementedException();
+            this.CheckIfEmpty();
+            T item = this.items[startIndex];
+            this.startIndex++;
+            this.Count--;
+            return item;
         }
 
         public void Enqueue(T item)
