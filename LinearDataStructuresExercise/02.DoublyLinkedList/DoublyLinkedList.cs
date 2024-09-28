@@ -8,8 +8,9 @@
     {
         private class Node
         {
-            public Node()
+            public Node(T element)
             {
+                this.Element = element;
             }
 
             public T Element { get; set; }
@@ -26,7 +27,21 @@
 
         public void AddFirst(T item)
         {
-            throw new NotImplementedException();
+            Node node = new Node(item);
+
+            if (this.head == null)
+            {
+                this.head = node;
+                this.tail = node;
+            }
+            else
+            {
+                this.head.Previous = node;
+                node.Next = this.head;
+                this.head = node;
+            }
+
+            this.Count++;
         }
 
         public void AddLast(T item)
