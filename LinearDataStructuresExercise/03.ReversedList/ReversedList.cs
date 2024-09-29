@@ -83,7 +83,15 @@
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            int index = this.IndexOf(item);
+
+            if (index == -1)
+            {
+                return false;
+            }
+
+            this.RemoveAt(index);
+            return true;
         }
 
         public void RemoveAt(int index)
