@@ -11,7 +11,9 @@
         private T[] items;
 
         public ReversedList()
-            : this(DefaultCapacity) { }
+            : this(DefaultCapacity)
+        {
+        }
 
         public ReversedList(int capacity)
         {
