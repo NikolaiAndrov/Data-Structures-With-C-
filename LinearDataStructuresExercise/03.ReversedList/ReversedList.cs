@@ -117,6 +117,7 @@
 
             this.items[this.Count - 1] = default;
             this.Count--;
+            this.Shrink();
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -145,6 +146,21 @@
                 T[] newArray = new T[this.Count * 2];
 
                 for (int i = 0; i < this.items.Length; i++)
+                {
+                    newArray[i] = this.items[i];
+                }
+
+                this.items = newArray;
+            }
+        }
+
+        private void Shrink()
+        {
+            if (this.Count < this.items.Length / 2)
+            {
+                T[] newArray = new T[this.Count + 1];
+
+                for (int i = 0; i < this.Count; i++)
                 {
                     newArray[i] = this.items[i];
                 }
