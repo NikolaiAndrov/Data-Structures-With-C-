@@ -3,7 +3,6 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
 
     public class ReversedList<T> : IAbstractList<T>
     {
@@ -78,7 +77,18 @@
 
         public void Insert(int index, T item)
         {
-            throw new NotImplementedException();
+            this.ValidateIndex(index);
+            this.Grow();
+
+            index = this.Count - 1 - index;
+
+            for (int i = this.Count - 1; i > index; i--)
+            {
+                this.items[i + 1] = this.items[i];
+            }
+
+            this.items[index + 1] = item;
+            this.Count++;
         }
 
         public bool Remove(T item)
