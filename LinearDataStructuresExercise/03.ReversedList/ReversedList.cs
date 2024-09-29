@@ -88,7 +88,17 @@
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            this.ValidateIndex(index);
+
+            index = this.Count - 1 - index;
+
+            for (int i = index; i < this.Count - 1; i++)
+            {
+                this.items[i] = this.items[i + 1];
+            }
+
+            this.items[this.Count - 1] = default;
+            this.Count--;
         }
 
         public IEnumerator<T> GetEnumerator()
