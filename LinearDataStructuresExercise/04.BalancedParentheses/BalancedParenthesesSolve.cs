@@ -7,6 +7,12 @@
     {
         public bool AreBalanced(string parentheses)
         {
+
+            if (parentheses.Length % 2 != 0)
+            {
+                return false;
+            }
+
             Stack<char> openParentheses = new Stack<char>();
 
             foreach (char ch in parentheses)
