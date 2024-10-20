@@ -32,7 +32,23 @@
 
         public IEnumerable<T> OrderBfs()
         {
-            throw new NotImplementedException();
+            var queueTree = new Queue<Tree<T>>();
+            queueTree.Enqueue(this);
+
+            var result = new List<T>();
+
+            while (queueTree.Count > 0)
+            {
+                var currentTree = queueTree.Dequeue();
+                result.Add(currentTree.value);
+
+                foreach (var child in currentTree.children)
+                {
+                    queueTree.Enqueue(child);
+                }
+            }
+
+            return result;
         }
 
         public IEnumerable<T> OrderDfs()
