@@ -128,7 +128,21 @@
 
         public void RemoveNode(T nodeKey)
         {
-            throw new NotImplementedException();
+            var nodeToDelete = this.FindTreeBfs(nodeKey);
+
+            if (nodeToDelete == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var parentNode = nodeToDelete.parent;
+
+            if (parentNode == null)
+            {
+                throw new ArgumentException();
+            }
+
+            parentNode.children.Remove(nodeToDelete);
         }
 
         public void Swap(T firstKey, T secondKey)
