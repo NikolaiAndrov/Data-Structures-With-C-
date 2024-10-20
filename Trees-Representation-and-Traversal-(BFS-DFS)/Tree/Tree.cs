@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Xml.Linq;
 
     public class Tree<T> : IAbstractTree<T>
     {
@@ -147,7 +148,32 @@
 
         public void Swap(T firstKey, T secondKey)
         {
-            throw new NotImplementedException();
+            var firstNode = this.FindTreeBfs(firstKey);
+            var secondNode = this.FindTreeBfs(secondKey);
+
+            if (firstNode == null || secondNode == null)
+            {
+                throw new ArgumentNullException("One or both nodes not found.");
+            }
+
+            if (firstNode.parent == null || secondNode.parent == null)
+            {
+                throw new ArgumentException("Cannot swap root or unparented nodes.");
+            }
+
+            var firstParent = firstNode.parent;
+            var secondParent = secondNode.parent;
+
+            int firstIndex = firstParent.children.IndexOf(firstNode);
+            int secondIndex = secondParent.children.IndexOf(secondNode);
+
+            firstParent.children[firstIndex] = secondNode;
+            secondParent.children[secondIndex] = firstNode;
+
+            var tempParent = firstNode.parent;
+            firstNode.parent = secondNode.parent;
+            secondNode.parent = tempParent;
         }
+
     }
 }
