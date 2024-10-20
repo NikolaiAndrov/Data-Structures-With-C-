@@ -53,6 +53,23 @@
 
         public IEnumerable<T> OrderDfs()
         {
+            var result = new List<T>();
+            this.Dfs(this, result);
+            return result;
+        }
+
+        private void Dfs(Tree<T> node, ICollection<T> result)
+        {
+            foreach(var child in node.children)
+            {
+                this.Dfs(child, result);
+            }
+
+            result.Add(node.value);
+        }
+
+        public IEnumerable<T> OrderStackDfs()
+        {
             var stackTree = new Stack<Tree<T>>();
             stackTree.Push(this);
 
