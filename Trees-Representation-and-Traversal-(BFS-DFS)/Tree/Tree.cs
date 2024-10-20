@@ -53,7 +53,23 @@
 
         public IEnumerable<T> OrderDfs()
         {
-            throw new NotImplementedException();
+            var stackTree = new Stack<Tree<T>>();
+            stackTree.Push(this);
+
+            var result = new Stack<T>();
+
+            while (stackTree.Count > 0)
+            {
+                var currentTree = stackTree.Pop();
+                result.Push(currentTree.value);
+
+                foreach (var child in currentTree.children)
+                {
+                    stackTree.Push(child);
+                }
+            }
+
+            return result;
         }
 
         public void RemoveNode(T nodeKey)
