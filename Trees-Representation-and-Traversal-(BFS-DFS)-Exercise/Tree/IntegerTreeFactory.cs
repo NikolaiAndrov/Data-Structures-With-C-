@@ -46,7 +46,7 @@
             var childNode = this.CreateNodeByKey(child);
 
             parentNode.AddChild(childNode);
-            childNode.AddChild(childNode);
+            childNode.AddParent(parentNode);
         }
 
         public IntegerTree GetRoot()
