@@ -14,6 +14,7 @@
 
             foreach (var child in children)
             {  
+                child.Parent = this;
                 this.children.Add(child);
             }
         }
