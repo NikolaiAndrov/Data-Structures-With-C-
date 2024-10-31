@@ -43,7 +43,7 @@
             return sb.ToString().Trim();
         }
 
-        public void DfsAsString(StringBuilder sb, Tree<T> tree, int indent)
+        private void DfsAsString(StringBuilder sb, Tree<T> tree, int indent)
         {
             sb.Append(' ', indent)
               .AppendLine(tree.Key.ToString());
