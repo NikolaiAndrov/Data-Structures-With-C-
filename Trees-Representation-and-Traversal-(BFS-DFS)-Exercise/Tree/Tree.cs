@@ -56,7 +56,29 @@
 
         public IEnumerable<T> GetInternalKeys()
         {
-            throw new NotImplementedException();
+            var keys = new List<T>();
+            var stack = new Stack<Tree<T>>();
+            stack.Push(this);
+
+            while (stack.Count > 0)
+            {
+                var currentTree = stack.Pop();
+
+                if (currentTree.Parent != null)
+                {
+                    keys.Add(currentTree.Key);
+                }
+
+                foreach(var child in currentTree.children)
+                {
+                    if (child.children.Count > 0)
+                    {
+                        stack.Push(child);
+                    }
+                }
+            }
+
+            return keys;
         }
 
         public IEnumerable<T> GetLeafKeys()
