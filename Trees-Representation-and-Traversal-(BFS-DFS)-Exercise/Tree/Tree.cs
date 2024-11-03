@@ -103,12 +103,23 @@
 
         public T GetDeepestKey()
         {
-            Tree<T> deepestNode = this.GetDeepestNode();
+            var deepestNode = this.GetDeepestNode();
             return deepestNode.Key;
         }
         public IEnumerable<T> GetLongestPath()
         {
-            throw new NotImplementedException();
+            var result = new Stack<T>();
+            var deepestNode = this.GetDeepestNode();
+
+            while (deepestNode.Parent != null)
+            {
+                result.Push(deepestNode.Key);
+                deepestNode = deepestNode.Parent;
+            }
+
+            result.Push(deepestNode.Key);
+
+            return result;
         }
 
         private Tree<T> GetDeepestNode()
