@@ -111,13 +111,11 @@
             var result = new Stack<T>();
             var deepestNode = this.GetDeepestNode();
 
-            while (deepestNode.Parent != null)
+            while (deepestNode != null)
             {
                 result.Push(deepestNode.Key);
                 deepestNode = deepestNode.Parent;
             }
-
-            result.Push(deepestNode.Key);
 
             return result;
         }
