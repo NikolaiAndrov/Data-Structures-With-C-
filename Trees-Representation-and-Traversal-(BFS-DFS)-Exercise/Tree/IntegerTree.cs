@@ -50,7 +50,48 @@
 
         public IEnumerable<Tree<int>> GetSubtreesWithGivenSum(int sum)
         {
-            throw new NotImplementedException();
+            var internalNodes = new List<Tree<int>>();
+            this.DfsInternalNodes(this, internalNodes);
+
+            foreach (var node in internalNodes)
+            {
+                var subtree = this.GetSubtreeKeysWithGivenSum(node, sum);
+
+                if (subtree != null)
+                {
+                    return subtree;
+                }
+            }
+
+            return null;
+        }
+
+        private IEnumerable<Tree<int>> GetSubtreeKeysWithGivenSum(Tree<int> tree ,int sum)
+        {
+            var queue = new Queue<Tree<int>>();
+            var currentPath = new List<Tree<int>>();
+            int currentSum = 0;
+
+            queue.Enqueue(tree);
+
+            while (queue.Count > 0)
+            {
+                var currentTree = queue.Dequeue();
+                currentSum += currentTree.Key;
+                currentPath.Add(currentTree);
+
+                foreach (var subTree in currentTree.Children)
+                {
+                    queue.Enqueue(subTree);
+                }
+            }
+
+            if (sum == currentSum)
+            {
+                return currentPath;
+            }
+  
+            return null;
         }
     }
 }

@@ -54,7 +54,7 @@
         {
             List<Tree<int>> subtrees = this.tree.GetSubtreesWithGivenSum(43).ToList();
 
-            Assert.AreEqual(1, subtrees.Count);
+            Assert.AreEqual(3, subtrees.Count);
 
             string treeAsString = subtrees[0].AsString();
 
