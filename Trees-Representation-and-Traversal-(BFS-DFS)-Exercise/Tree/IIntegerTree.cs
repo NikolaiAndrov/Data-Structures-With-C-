@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Tree
+﻿namespace Tree
 {
+    using System;
+    using System.Collections.Generic;
+
     public interface IIntegerTree: IAbstractTree<int>
     {
         IEnumerable<IEnumerable<int>> GetPathsWithGivenSum(int sum);

@@ -1,6 +1,7 @@
 ﻿namespace Tree
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
 
     public class Tree<T> : IAbstractTree<T>
@@ -82,21 +83,21 @@
 
         public IEnumerable<T> GetLeafKeys()
         {
-            var leafKeys = new List<T>();
-            this.DfsLeafKeys(this, leafKeys);
-            return leafKeys;
+            var leafs = new List<Tree<T>>();
+            this.DfsLeafNodes(this, leafs);
+            return leafs.Select(l => l.Key);
         }
 
-        private void DfsLeafKeys(Tree<T> tree, ICollection<T> result)
+        protected void DfsLeafNodes(Tree<T> tree, ICollection<Tree<T>> result)
         {
             if (tree.children.Count == 0)
             {
-                result.Add(tree.Key);
+                result.Add(tree);
             }
 
             foreach (var child in tree.children)
             {
-                this.DfsLeafKeys(child, result);
+                this.DfsLeafNodes(child, result);
             }
         }
 
@@ -105,6 +106,7 @@
             var deepestNode = this.GetDeepestNode();
             return deepestNode.Key;
         }
+
         public IEnumerable<T> GetLongestPath()
         {
             var result = new Stack<T>();
