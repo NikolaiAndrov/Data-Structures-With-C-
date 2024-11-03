@@ -56,29 +56,22 @@
 
         public IEnumerable<T> GetInternalKeys()
         {
-            var keys = new List<T>();
-            var stack = new Stack<Tree<T>>();
-            stack.Push(this);
+            var nodes = new List<Tree<T>>();
+            this.DfsInternalNodes(this, nodes);
+            return nodes.Select(n => n.Key);
+        }
 
-            while (stack.Count > 0)
+        protected void DfsInternalNodes(Tree<T> tree, List<Tree<T>> nodes)
+        {
+            if (tree.children.Count > 0 && tree.Parent != null)
             {
-                var currentTree = stack.Pop();
-
-                if (currentTree.Parent != null)
-                {
-                    keys.Add(currentTree.Key);
-                }
-
-                foreach(var child in currentTree.children)
-                {
-                    if (child.children.Count > 0)
-                    {
-                        stack.Push(child);
-                    }
-                }
+                nodes.Add(tree);
             }
 
-            return keys;
+            foreach (var subtree in tree.children)
+            {
+                this.DfsInternalNodes(subtree, nodes);
+            }
         }
 
         public IEnumerable<T> GetLeafKeys()
