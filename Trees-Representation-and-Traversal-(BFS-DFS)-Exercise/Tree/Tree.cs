@@ -103,11 +103,21 @@
 
         public T GetDeepestKey()
         {
+            Tree<T> deepestNode = this.GetDeepestNode();
+            return deepestNode.Key;
+        }
+        public IEnumerable<T> GetLongestPath()
+        {
+            throw new NotImplementedException();
+        }
+
+        private Tree<T> GetDeepestNode()
+        {
             Tree<T> deepestNode = null;
             int depth = 0;
             var queue = new Queue<Tree<T>>();
             queue.Enqueue(this);
-            
+
             while (queue.Count > 0)
             {
                 var currentTree = queue.Dequeue();
@@ -125,7 +135,7 @@
                 }
             }
 
-            return deepestNode.Key;
+            return deepestNode;
         }
 
         private int GetNodeDepth(Tree<T> tree)
@@ -139,11 +149,6 @@
             }
 
             return depth;
-        }
-
-        public IEnumerable<T> GetLongestPath()
-        {
-            throw new NotImplementedException();
         }
     }
 }
