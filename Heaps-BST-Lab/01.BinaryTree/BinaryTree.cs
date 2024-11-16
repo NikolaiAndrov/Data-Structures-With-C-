@@ -7,14 +7,16 @@
     {
         public BinaryTree(T element, IAbstractBinaryTree<T> left, IAbstractBinaryTree<T> right)
         {
-            throw new NotImplementedException();
+            this.Value = element;
+            this.LeftChild = left;
+            this.RightChild = right;
         }
 
-        public T Value => throw new NotImplementedException();
+        public T Value { get; private set; }
 
-        public IAbstractBinaryTree<T> LeftChild => throw new NotImplementedException();
+        public IAbstractBinaryTree<T> LeftChild { get; private set; }
 
-        public IAbstractBinaryTree<T> RightChild => throw new NotImplementedException();
+        public IAbstractBinaryTree<T> RightChild { get; private set; }
 
         public string AsIndentedPreOrder(int indent)
         {
