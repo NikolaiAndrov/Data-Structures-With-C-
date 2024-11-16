@@ -30,7 +30,21 @@
 
         public IEnumerable<IAbstractBinaryTree<T>> InOrder()
         {
-            throw new NotImplementedException();
+            var result = new List<IAbstractBinaryTree<T>>();
+
+            if (this.LeftChild != null)
+            {
+                result.AddRange(this.LeftChild.InOrder());
+            }
+
+            result.Add(this);
+
+            if (this.RightChild != null)
+            {
+                result.AddRange(this.RightChild.InOrder());
+            }
+
+            return result;
         }
 
         public IEnumerable<IAbstractBinaryTree<T>> PostOrder()
