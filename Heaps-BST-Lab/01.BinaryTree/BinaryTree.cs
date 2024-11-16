@@ -40,7 +40,20 @@
 
         public IEnumerable<IAbstractBinaryTree<T>> PreOrder()
         {
-            throw new NotImplementedException();
+            var result = new List<IAbstractBinaryTree<T>>();
+            result.Add(this);
+
+            if (this.LeftChild != null)
+            {
+                result.AddRange(this.LeftChild.PreOrder());
+            }
+
+            if (this.RightChild != null)
+            {
+                result.AddRange(this.RightChild.PreOrder());
+            }
+
+            return result;
         }
     }
 }
