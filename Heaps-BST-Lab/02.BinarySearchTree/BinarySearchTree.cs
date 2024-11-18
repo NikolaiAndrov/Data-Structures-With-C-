@@ -5,7 +5,25 @@
     public class BinarySearchTree<T> : IBinarySearchTree<T>
         where T : IComparable<T>
     {
-        public BinarySearchTree() { }
+        private class Node
+        {
+            public Node(T value)
+            {
+                this.Value = value;
+            }
+
+            public T Value { get; private set; }
+
+            public Node LeftChild { get; private set; }
+
+            public Node RightChild { get; private set; }
+        }
+
+        private Node root;
+
+        public BinarySearchTree() 
+        {
+        }
 
         public bool Contains(T element)
         {
