@@ -32,7 +32,19 @@
 
         public void EachInOrder(Action<T> action)
         {
-            throw new NotImplementedException();
+            this.EachInOrder(action, this.root);
+        }
+
+        private void EachInOrder(Action<T> action, Node node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            this.EachInOrder(action, node.LeftChild);
+            action.Invoke(node.Value);
+            this.EachInOrder(action, node.RightChild);
         }
 
         public void Insert(T element)
