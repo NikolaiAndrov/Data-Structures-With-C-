@@ -25,6 +25,23 @@
         {
         }
 
+        private BinarySearchTree(Node node)
+        {
+            this.PreOrderCopy(node);
+        }
+
+        private void PreOrderCopy(Node node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            this.Insert(node.Value);
+            this.PreOrderCopy(node.Left);
+            this.PreOrderCopy(node.Right);
+        }
+
         public bool Contains(T element)
         {
             return this.FindNode(element, this.root) != null;
@@ -90,7 +107,14 @@
 
         public IBinarySearchTree<T> Search(T element)
         {
-            throw new NotImplementedException();
+            var node = this.FindNode(element, this.root);
+
+            if (node == null)
+            {
+                return null;
+            }
+
+            return new BinarySearchTree<T>(node);
         }
     }
 }
