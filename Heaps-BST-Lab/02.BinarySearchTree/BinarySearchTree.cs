@@ -27,7 +27,25 @@
 
         public bool Contains(T element)
         {
-            throw new NotImplementedException();
+            return this.FindNode(element, this.root) != null;
+        }
+
+        private Node FindNode(T element, Node node)
+        {
+            if (node == null)
+            {
+                return null;
+            }
+            else if (element.CompareTo(node.Value) > 0)
+            {
+                node = this.FindNode(element, node.Right);
+            }
+            else if (element.CompareTo(node.Value) < 0)
+            {
+                node = this.FindNode(element, node.Left);
+            }
+
+            return node;
         }
 
         public void EachInOrder(Action<T> action)
