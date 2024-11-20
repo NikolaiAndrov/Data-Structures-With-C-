@@ -26,7 +26,12 @@
 
         public T Peek()
         {
-            throw new NotImplementedException();
+            if (this.elements.Count == 0)
+            {
+                throw new InvalidOperationException();
+            }
+
+            return this.elements[0];
         }
     }
 }
