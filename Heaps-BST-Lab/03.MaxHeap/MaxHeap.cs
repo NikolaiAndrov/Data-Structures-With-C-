@@ -39,12 +39,36 @@
             this.elements[secondIndex] = element;
         }
 
-        private int GetParentIndex(int index)
-            => (index - 1) / 2;
-
         public T ExtractMax()
         {
-            throw new NotImplementedException();
+            if (this.elements.Count == 0)
+            {
+                throw new InvalidOperationException();
+            }
+
+            T element = this.elements[0];
+            this.Swap(0, this.elements.Count - 1);
+            this.elements.RemoveAt(this.elements.Count - 1);
+            this.HeapifyDown(0);
+
+            return element;
+        }
+
+        private void HeapifyDown(int index)
+        {
+            int biggerChildIndex = this.GetBiggerChildIndex(index);
+
+            if (biggerChildIndex == -1 || this.elements[0].CompareTo(this.elements[biggerChildIndex]) > 0)
+            {
+                return;
+            }
+
+            while (biggerChildIndex > 0 && this.elements[index].CompareTo(this.elements[biggerChildIndex]) < 0)
+            {
+                this.Swap(index, biggerChildIndex);
+                index = biggerChildIndex;
+                biggerChildIndex = this.GetBiggerChildIndex(index);
+            }
         }
 
         public T Peek()
@@ -55,6 +79,38 @@
             }
 
             return this.elements[0];
+        }
+
+        private int GetParentIndex(int index)
+            => (index - 1) / 2;
+
+        private int GetLeftChildIndex(int index)
+            => (index * 2) + 1;
+
+        private int GetRightChildIndex(int index)
+            => (index * 2) + 2;
+
+        private int GetBiggerChildIndex(int index)
+        {
+            int leftChildIndex = this.GetLeftChildIndex(index);
+            int rightChildIndex = this.GetRightChildIndex(index);
+
+            if (leftChildIndex > this.elements.Count - 1)
+            {
+                return -1;
+            }
+
+            if (rightChildIndex > this.elements.Count - 1)
+            {
+                return leftChildIndex;
+            }
+
+            if (this.elements[leftChildIndex].CompareTo(this.elements[rightChildIndex]) > 0)
+            {
+                return leftChildIndex;
+            }
+
+            return rightChildIndex;
         }
     }
 }
