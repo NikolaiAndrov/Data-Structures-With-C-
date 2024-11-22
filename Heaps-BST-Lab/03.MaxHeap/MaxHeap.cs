@@ -16,8 +16,26 @@
 
         public void Add(T element)
         {
-            throw new NotImplementedException();
+            this.elements.Add(element);
+            this.HeapifyUp(this.elements.Count - 1);
         }
+
+        private void HeapifyUp(int index)
+        {
+            int parentIndex = this.GetParentIndex(index);
+
+            while (index > 0 && this.elements[index].CompareTo(this.elements[parentIndex]) > 0)
+            {
+                T element = this.elements[index];
+                this.elements[index] = this.elements[parentIndex];
+                this.elements[parentIndex] = element;
+                index = parentIndex;
+                parentIndex = this.GetParentIndex(index);
+            }
+        }
+
+        private int GetParentIndex(int index)
+            => (index - 1) / 2;
 
         public T ExtractMax()
         {
