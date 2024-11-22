@@ -26,12 +26,17 @@
 
             while (index > 0 && this.elements[index].CompareTo(this.elements[parentIndex]) > 0)
             {
-                T element = this.elements[index];
-                this.elements[index] = this.elements[parentIndex];
-                this.elements[parentIndex] = element;
+                this.Swap(index, parentIndex);
                 index = parentIndex;
                 parentIndex = this.GetParentIndex(index);
             }
+        }
+
+        private void Swap(int firstIndex, int secondIndex)
+        {
+            T element = this.elements[firstIndex];
+            this.elements[firstIndex] = this.elements[secondIndex];
+            this.elements[secondIndex] = element;
         }
 
         private int GetParentIndex(int index)
